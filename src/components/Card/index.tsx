@@ -14,13 +14,13 @@ interface Props {
     navigationProps?: UserData | Teams;
 }
 
-const Card = ({
+const Card: React.FC<Props> = ({
     id,
     columns,
     url,
     hasNavigation = true,
     navigationProps = null,
-}: Props): JSX.Element => {
+}) => {
     const navigate = useNavigate();
 
     const handleClick = (e: Event) => {

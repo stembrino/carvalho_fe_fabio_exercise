@@ -10,7 +10,7 @@ interface Props {
     isLoading: boolean;
 }
 
-const List = ({items, hasNavigation = true, isLoading}: Props) => {
+const List: React.FC<Props> = ({items, hasNavigation = true, isLoading}) => {
     return (
         <Container>
             {isLoading && <Spinner />}
