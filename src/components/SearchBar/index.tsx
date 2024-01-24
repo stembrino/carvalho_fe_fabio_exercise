@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
-import {Container} from 'components/GlobalComponents';
+import React, {ChangeEvent} from 'react';
 import {InputSearch} from './styles';
 
 interface Props {
