@@ -68,18 +68,14 @@ const TeamOverview = () => {
     React.useEffect(() => {
         var getTeamUsers = async () => {
             const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
-            const teamLead = await getUserData(teamLeadId);
-
-            const teamMembers = [];
-            for(var teamMemberId of teamMemberIds) {
-                const data = await getUserData(teamMemberId);
-                teamMembers.push(data);
-            }
-            setPageData({
-                teamLead,
-                teamMembers,
+            const [teamLead, ...teamMembers] = await Promise.all([getUserData(teamLeadId), ...teamMemberIds.map(getUserData)]);
+            setPageData(() => {
+                setIsLoading(false);
+                return {
+                    teamLead,
+                    teamMembers,
+                };
             });
-            setIsLoading(false);
         };
         getTeamUsers();
     }, [teamId]);
