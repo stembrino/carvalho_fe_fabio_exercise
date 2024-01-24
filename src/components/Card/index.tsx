@@ -23,18 +23,19 @@ const Card = ({
 }: Props): JSX.Element => {
     const navigate = useNavigate();
 
+    const handleClick = (e: Event) => {
+        if (!hasNavigation) {return;} 
+        e.preventDefault();
+        navigate(url, {
+           state: navigationProps,
+        });
+    };
+
     return (
         <Container
             data-testid={`cardContainer-${id}`}
             hasNavigation={hasNavigation}
-            onClick={(e: Event) => {
-                if (hasNavigation) {
-                    navigate(url, {
-                        state: navigationProps,
-                    });
-                }
-                e.preventDefault();
-            }}
+            onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (
                 <p key={columnKey}>

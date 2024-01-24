@@ -9,15 +9,16 @@ interface Props {
 
 const Header = ({title, showBackButton = true}: Props) => {
     const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(-1);
+    };
+
     return (
         <HeaderContainer>
             <NavigationHeader>
                 {showBackButton && (
-                    <BackButton
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
+                    <BackButton onClick={handleClick}>
                         🔙
                     </BackButton>
                 )}
