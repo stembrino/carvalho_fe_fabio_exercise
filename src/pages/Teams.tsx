@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import {ListItem, Teams as TeamsList} from 'types';
-import {getTeams as fetchTeams} from '../api';
 import Header from '../components/Header';
 import List from '../components/List';
 import {Container} from '../components/GlobalComponents';
+import {useTeamsList} from './hooks/useTeamsList';
 
 var MapT = (teams: TeamsList[]) => {
     return teams.map(team => {
@@ -23,17 +23,7 @@ var MapT = (teams: TeamsList[]) => {
 };
 
 const Teams: React.FC = () => {
-    const [teams, setTeams] = React.useState<TeamsList[]>([]);
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
-
-    React.useEffect(() => {
-        const getTeams = async () => {
-            const response = await fetchTeams();
-            setTeams(response);
-            setIsLoading(false);
-        };
-        getTeams();
-    }, []);
+    const {isLoading, teams} = useTeamsList();
 
     return (
         <Container>
