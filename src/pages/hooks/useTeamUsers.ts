@@ -3,35 +3,30 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {UserData} from 'types';
 
-interface PageState {
+interface TeamUsers {
     teamLead?: UserData;
     teamMembers?: UserData[];
 }
 
 export const useTeamUsers = () => {
     const {teamId} = useParams();
-    const [pageData, setPageData] = useState<PageState>({});
+    const [teamUsers, setTeamUsers] = useState<TeamUsers>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const getTeamUsers = async () => {
             const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
             const [teamLead, ...teamMembers] = await Promise.all([getUserData(teamLeadId), ...teamMemberIds.map(getUserData)]);
-            setPageData(() => {
-                setIsLoading(false);
-                return {
-                    teamLead,
-                    teamMembers,
-                };
+            setIsLoading(() => {
+                setTeamUsers({teamLead, teamMembers});
+                return false;
             });
         };
         getTeamUsers();
     }, [teamId]);
 
     return {
-        pageData,
+        teamUsers,
         isLoading,
-        setPageData,
-        setIsLoading,
     };
 };

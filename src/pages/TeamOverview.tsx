@@ -32,37 +32,35 @@ var mapArray = (users: UserData[]) => {
     }) as ListItem[];
 };
 
-var mapTLead = tlead => {
-    var columns = [
+
+const TeamOverview = () => {
+    const location = useLocation();
+    const {isLoading, teamUsers: {teamLead, teamMembers}} = useTeamUsers();
+
+    const teamLeadCardColumns = () => [
         {
             key: 'Team Lead',
             value: '',
         },
         {
             key: 'Name',
-            value: `${tlead.firstName} ${tlead.lastName}`,
+            value: `${teamLead.firstName} ${teamLead.lastName}`,
         },
         {
             key: 'Display Name',
-            value: tlead.displayName,
+            value: teamLead.displayName,
         },
         {
             key: 'Location',
-            value: tlead.location,
+            value: teamLead.location,
         },
     ];
-    return <Card columns={columns} url={`/user/${tlead.id}`} navigationProps={tlead} />;
-};
-
-const TeamOverview = () => {
-    const location = useLocation();
-    const {isLoading, pageData} = useTeamUsers();
 
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
-            {!isLoading && mapTLead(pageData.teamLead)}
-            <List items={mapArray(pageData?.teamMembers ?? [])} isLoading={isLoading} />
+            {!isLoading && <Card columns={teamLeadCardColumns()} url={`/user/${teamLead.id}`} navigationProps={teamLead} />}
+            <List items={mapArray(teamMembers ?? [])} isLoading={isLoading} />
         </Container>
     );
 };
