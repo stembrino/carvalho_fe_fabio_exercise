@@ -10,6 +10,6 @@ export const CardButton = styled.button<{hasNavigation: boolean}>`
     padding: 20px;
     width: 250px;
     max-height: 200px;
-    cursor: ${props => (props.hasNavigation ? 'pointer' : 'default')};
+    cursor: ${({hasNavigation}) => (hasNavigation ? 'pointer' : 'default')};
     margin: 5px;
 `;
