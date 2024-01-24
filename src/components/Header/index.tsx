@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({title, showBackButton = true}) => {
         <HeaderContainer>
             <NavigationHeader>
                 {showBackButton && (
-                    <BackButton onClick={handleClick}>
+                    <BackButton type="button" onClick={handleClick}>
                         🔙
                     </BackButton>
                 )}

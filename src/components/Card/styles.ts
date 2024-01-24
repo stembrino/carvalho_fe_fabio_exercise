@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div<{hasNavigation: boolean}>`
+export const CardButton = styled.button<{hasNavigation: boolean}>`
     display: flex;
     flex-direction: column;
     align-items: center;
