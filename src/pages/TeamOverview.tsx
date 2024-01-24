@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {useLocation} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
 import Card from '../components/Card';
@@ -33,11 +33,13 @@ var mapArray = (users: UserData[]) => {
 };
 
 
-const TeamOverview = () => {
+const TeamOverview: React.FC = () => {
     const location = useLocation();
     const {isLoading, teamUsers: {teamLead, teamMembers}} = useTeamUsers();
 
-    const teamLeadCardColumns = () => [
+    const teamLeadCard = (): JSX.Element | null => {
+        if(!teamLead) {return null;}
+        const columnsConfig = [
         {
             key: 'Team Lead',
             value: '',
@@ -56,10 +58,13 @@ const TeamOverview = () => {
         },
     ];
 
+    return <Card columns={columnsConfig} url={`/user/${teamLead.id}`} navigationProps={teamLead} />;
+};
+
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
-            {!isLoading && <Card columns={teamLeadCardColumns()} url={`/user/${teamLead.id}`} navigationProps={teamLead} />}
+            {!isLoading && teamLeadCard()}
             <List items={mapArray(teamMembers ?? [])} isLoading={isLoading} />
         </Container>
     );
