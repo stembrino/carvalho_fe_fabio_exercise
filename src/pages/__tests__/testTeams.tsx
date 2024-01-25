@@ -39,7 +39,7 @@ describe('Teams', () => {
                 expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
             });
         });
-        
+
         it('should render teams list', async () => {
             setUp();
             await waitFor(() => {
@@ -92,5 +92,4 @@ describe('Teams', () => {
             });
         });
     });
-    
 });
