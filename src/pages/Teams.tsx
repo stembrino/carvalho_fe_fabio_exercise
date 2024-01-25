@@ -8,7 +8,7 @@ import {useTeamsList} from './hooks/useTeamsList';
 
 const Teams: React.FC = () => {
     const {isLoading, teamsFiltered, setQuery, query} = useTeamsList();
-    
+
     const teamsList = () => {
         return teamsFiltered.map(team => {
             var columns = [
@@ -29,7 +29,7 @@ const Teams: React.FC = () => {
     return (
         <Container>
             <Header title="Teams" showBackButton={false} />
-            <SearchBar onChange={setQuery} value={query} placeholder='Search by name'  width={320}/>
+            <SearchBar onChange={setQuery} value={query} placeholder="Search by name" width={320} />
             <List items={teamsList()} isLoading={isLoading} />
         </Container>
     );

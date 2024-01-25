@@ -24,9 +24,11 @@ const Card: React.FC<Props> = ({
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (!hasNavigation) {return;} 
+        if (!hasNavigation) {
+            return;
+        }
         navigate(url, {
-           state: navigationProps,
+            state: navigationProps,
         });
     };
 

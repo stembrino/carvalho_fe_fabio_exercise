@@ -19,7 +19,12 @@ export const useTeamsList = () => {
     }, []);
 
     const teamsFiltered = useMemo(() => {
-        return teams.filter((team) => team.name.replace(/\s/g, '').toLowerCase().includes(query.replace(/\s/g, '').toLowerCase()));
+        return teams.filter(team =>
+            team.name
+                .replace(/\s/g, '')
+                .toLowerCase()
+                .includes(query.replace(/\s/g, '').toLowerCase())
+        );
     }, [teams, query]);
 
     return {isLoading, setQuery, query, teamsFiltered};

@@ -13,7 +13,10 @@ export const useTeamUsers = () => {
     useEffect(() => {
         const getTeamUsers = async () => {
             const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
-            const [teamLeadResponse, ...teamMembersResponse] = await Promise.all([getUserData(teamLeadId), ...teamMemberIds.map(getUserData)]);
+            const [teamLeadResponse, ...teamMembersResponse] = await Promise.all([
+                getUserData(teamLeadId),
+                ...teamMemberIds.map(getUserData),
+            ]);
             setIsLoading(() => {
                 setTeamLead(teamLeadResponse);
                 setTeamMembers(teamMembersResponse);
@@ -26,7 +29,11 @@ export const useTeamUsers = () => {
     const teamMembersFiltered = useMemo(() => {
         return teamMembers.filter(({firstName, lastName}) => {
             const fullName = `${firstName} ${lastName}`;
-            return fullName.replace(/\s/g, '').toLowerCase().includes(query.replace(/\s/g, '').toLowerCase());});
+            return fullName
+                .replace(/\s/g, '')
+                .toLowerCase()
+                .includes(query.replace(/\s/g, '').toLowerCase());
+        });
     }, [teamMembers, query]);
 
     return {

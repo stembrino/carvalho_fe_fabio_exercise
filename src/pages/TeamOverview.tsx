@@ -13,7 +13,9 @@ const TeamOverview: React.FC = () => {
     const {isLoading, teamLead, teamMembersFiltered, query, setQuery} = useTeamUsers();
 
     const teamLeadCard = (): JSX.Element | null => {
-        if(!teamLead) {return null;}
+        if (!teamLead) {
+            return null;
+        }
         const columnsConfig = [
             {
                 key: 'Team Lead',
@@ -33,7 +35,9 @@ const TeamOverview: React.FC = () => {
             },
         ];
 
-        return <Card columns={columnsConfig} url={`/user/${teamLead.id}`} navigationProps={teamLead} />;
+        return (
+            <Card columns={columnsConfig} url={`/user/${teamLead.id}`} navigationProps={teamLead} />
+        );
     };
 
     const teamMembers = () => {
@@ -64,7 +68,12 @@ const TeamOverview: React.FC = () => {
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
-            <SearchBar onChange={setQuery} value={query} placeholder='Search team member'  width={320}/>
+            <SearchBar
+                onChange={setQuery}
+                value={query}
+                placeholder="Search team member"
+                width={320}
+            />
             {!isLoading && teamLeadCard()}
             <List items={teamMembers()} isLoading={isLoading} />
         </Container>
