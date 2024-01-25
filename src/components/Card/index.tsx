@@ -36,7 +36,7 @@ const Card: React.FC<Props> = ({
         <CardButton
             type="button"
             data-testid={`cardContainer-${id}`}
-            hasNavigation={hasNavigation}
+            $hasNavigation={hasNavigation}
             onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (
