@@ -45,8 +45,7 @@ describe('Card', () => {
         render(
             <Card
                 columns={[{key: 'columnKey', value: 'columnValue'}]}
-                url="path"
-                navigationProps={navProps}
+                navigation={{data: navProps, url: 'path'}}
             />
         );
 
@@ -56,7 +55,7 @@ describe('Card', () => {
     });
 
     it('should not navigate when card is clicked and navigation is disabled', () => {
-        render(<Card columns={[{key: 'columnKey', value: 'columnValue'}]} hasNavigation={false} />);
+        render(<Card columns={[{key: 'columnKey', value: 'columnValue'}]} />);
 
         fireEvent.click(screen.getByText('columnKey'));
 

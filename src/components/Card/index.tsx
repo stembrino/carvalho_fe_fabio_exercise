@@ -5,30 +5,29 @@ import {CardButton} from './styles';
 
 interface Props {
     id?: string;
-    url?: string;
     columns: Array<{
         key: string;
         value: string;
     }>;
-    hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
+    navigation?: {
+        url: string;
+        data: UserData | Teams;
+    }
 }
 
 const Card: React.FC<Props> = ({
     id,
     columns,
-    url,
-    hasNavigation = true,
-    navigationProps = null,
+    navigation,
 }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        if (!hasNavigation) {
+        if (!navigation) {
             return;
         }
-        navigate(url, {
-            state: navigationProps,
+        navigate(navigation.url, {
+            state: navigation.data,
         });
     };
 
@@ -36,7 +35,7 @@ const Card: React.FC<Props> = ({
         <CardButton
             type="button"
             data-testid={`cardContainer-${id}`}
-            $hasNavigation={hasNavigation}
+            $hasNavigation={!!navigation}
             onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (

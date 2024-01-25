@@ -20,7 +20,7 @@ var mapU = (user: UserData) => {
             value: user.location,
         },
     ];
-    return <Card columns={columns} hasNavigation={false} navigationProps={user} />;
+    return <Card columns={columns} />;
 };
 
 const UserOverview: React.FC = () => {

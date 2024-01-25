@@ -36,7 +36,7 @@ const TeamOverview: React.FC = () => {
         ];
 
         return (
-            <Card columns={columnsConfig} url={`/user/${teamLead.id}`} navigationProps={teamLead} />
+            <Card columns={columnsConfig} navigation={{url: `/user/${teamLead.id}`, data:teamLead}} />
         );
     };
 
