@@ -20,6 +20,7 @@ const SearchBar: React.FC<Props> = ({value = '', name, placeholder = '', width, 
             type="text"
             placeholder={placeholder}
             id="search-input"
+            aria-label="Search"
             name={name}
             value={value}
             width={width}
