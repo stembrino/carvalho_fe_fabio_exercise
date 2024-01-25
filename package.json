@@ -26,8 +26,8 @@
     "tsc-check": "tsc --noEmit",
     "prettier": "prettier --config ./.prettierrc.json --write './**/*.{js,tsx,ts}'",
     "prettier:check": "prettier --config ./.prettierrc.json --check './**/*.{js,tsx,ts}'",
-    "lint:check": "eslint 'src/**/*.{js,tsx,ts}' --max-warnings=0 --cache --cache-location /tmp/eslint-cache.json && npm run tsc-check && npm run prettier:check",
-    "lint:fix": "eslint 'src/**/*.{js,tsx,ts}' --fix"
+    "lint:check": "eslint \"src/**/*.{js,tsx,ts}\" --max-warnings=0 --cache --cache-location /tmp/eslint-cache.json && npm run tsc-check && npm run prettier:check",
+    "lint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
   },
   "eslintConfig": {
     "extends": [
