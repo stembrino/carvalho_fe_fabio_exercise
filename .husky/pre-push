@@ -1,0 +1,2 @@
+npm run tsc-check
+npm test

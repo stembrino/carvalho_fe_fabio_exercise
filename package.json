@@ -27,7 +27,8 @@
     "prettier": "prettier --config ./.prettierrc.json --write \"./**/*.{js,tsx,ts}\"",
     "prettier:check": "prettier --config ./.prettierrc.json --check \"./**/*.{js,tsx,ts}\"",
     "lint:check": "eslint \"src/**/*.{js,tsx,ts}\" --max-warnings=0 --cache --cache-location /tmp/eslint-cache.json && npm run tsc-check && npm run prettier:check",
-    "lint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +65,7 @@
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^5.9.1",
+    "husky": "^9.0.5",
     "prettier": "2.8.2",
     "typescript": "^4.9.4"
   }
