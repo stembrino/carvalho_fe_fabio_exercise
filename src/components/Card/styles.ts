@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
+
+const navStyles = css`
+    cursor: pointer;
+    &:hover {
+        background-color: #f7f7f7;
+        outline: 1px solid black;
+    }
+`;
 
 export const CardButton = styled.button<{$hasNavigation: boolean}>`
     display: flex;
@@ -10,6 +18,6 @@ export const CardButton = styled.button<{$hasNavigation: boolean}>`
     padding: 20px;
     width: 250px;
     max-height: 200px;
-    cursor: ${({$hasNavigation}) => ($hasNavigation ? 'pointer' : 'default')};
     margin: 5px;
+    ${({$hasNavigation}) => $hasNavigation && navStyles}
 `;
