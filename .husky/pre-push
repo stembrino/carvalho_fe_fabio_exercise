@@ -1,2 +1,2 @@
 npm run tsc-check
-npm test
+npm test -- --watchAll=false
