@@ -12,14 +12,10 @@ interface Props {
     navigation?: {
         url: string;
         data: UserData | Teams;
-    }
+    };
 }
 
-const Card: React.FC<Props> = ({
-    id,
-    columns,
-    navigation,
-}) => {
+const Card: React.FC<Props> = ({id, columns, navigation}) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
