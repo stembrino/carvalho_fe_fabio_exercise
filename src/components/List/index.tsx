@@ -7,9 +7,10 @@ import {Container} from './styles';
 interface Props {
     items?: ListItem[];
     isLoading: boolean;
+    align?: 'center' | 'flex-start';
 }
 
-const List: React.FC<Props> = ({items, isLoading}) => {
+const List: React.FC<Props> = ({items, isLoading, align}) => {
     return (
         <Container>
             {isLoading && <Spinner />}
@@ -21,6 +22,7 @@ const List: React.FC<Props> = ({items, isLoading}) => {
                             id={id}
                             columns={columns}
                             navigation={{data: navigationProps, url}}
+                            align={align}
                         />
                     );
                 })}

@@ -30,7 +30,7 @@ const Teams: React.FC = () => {
         <Container>
             <Header title="Teams" showBackButton={false} />
             <SearchBar onChange={setQuery} value={query} placeholder="Search by name" width={320} />
-            <List items={teamsList()} isLoading={isLoading} />
+            <List items={teamsList()} isLoading={isLoading} align="center" />
         </Container>
     );
 };

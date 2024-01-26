@@ -15,7 +15,7 @@ const navStyles = css`
     }
 `;
 
-export const CardButton = styled.button<{$hasNavigation: boolean}>`
+export const CardButton = styled.button<{$hasNavigation: boolean; $align: string}>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,5 +25,6 @@ export const CardButton = styled.button<{$hasNavigation: boolean}>`
     width: 250px;
     max-height: 200px;
     margin: 5px;
+    align-items: ${({$align}) => $align};
     ${({$hasNavigation}) => $hasNavigation && navStyles}
 `;

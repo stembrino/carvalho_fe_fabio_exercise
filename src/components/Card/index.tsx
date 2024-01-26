@@ -6,6 +6,7 @@ import Body from './Body';
 
 interface Props {
     id?: string;
+    align?: 'center' | 'flex-start';
     columns: Array<{
         key: string;
         value: string;
@@ -16,7 +17,7 @@ interface Props {
     };
 }
 
-const Card: React.FC<Props> = ({id, columns, navigation}) => {
+const Card: React.FC<Props> = ({id, columns, navigation, align = 'flex-start'}) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -33,6 +34,7 @@ const Card: React.FC<Props> = ({id, columns, navigation}) => {
             type="button"
             data-testid={`cardContainer-${id}`}
             $hasNavigation={!!navigation}
+            $align={align}
             onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (
