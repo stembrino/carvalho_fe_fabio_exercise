@@ -22,6 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "npm test -- --coverage .",
     "eject": "react-scripts eject",
     "tsc-check": "tsc --noEmit",
     "prettier": "prettier --config ./.prettierrc.json --write \"./**/*.{js,tsx,ts}\"",
