@@ -20,16 +20,14 @@ var mapU = (user: UserData) => {
             value: user.location,
         },
     ];
-    return <Card columns={columns} hasNavigation={false} navigationProps={user} />;
+    return <Card columns={columns} />;
 };
 
-const UserOverview = () => {
+const UserOverview: React.FC = () => {
     const location = useLocation();
     return (
         <Container>
-            <Header
-                title={`User ${location.state.firstName} ${location.state.lastName}`}
-            />
+            <Header title={`User ${location.state.firstName} ${location.state.lastName}`} />
             {mapU(location.state)}
         </Container>
     );

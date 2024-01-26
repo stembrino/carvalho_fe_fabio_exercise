@@ -1,94 +1,86 @@
-import * as React from 'react';
-import {useLocation, useParams} from 'react-router-dom';
-import {ListItem, UserData} from 'types';
-import {getTeamOverview, getUserData} from '../api';
+import React from 'react';
+import {useLocation} from 'react-router-dom';
+import {ListItem} from 'types';
+import SearchBar from 'components/SearchBar';
 import Card from '../components/Card';
-import {Container} from '../components/GlobalComponents';
+import {Container, Sections} from '../components/GlobalComponents';
 import Header from '../components/Header';
 import List from '../components/List';
+import {useTeamUsers} from './hooks/useTeamUsers';
 
-var mapArray = (users: UserData[]) => {
-    return users.map(u => {
-        var columns = [
+const TeamOverview: React.FC = () => {
+    const location = useLocation();
+    const {isLoading, teamLead, teamMembersFiltered, query, setQuery} = useTeamUsers();
+
+    const teamLeadCard = (): JSX.Element | null => {
+        if (!teamLead) {
+            return null;
+        }
+        const columnsConfig = [
+            {
+                key: 'Team Lead',
+                value: '',
+            },
             {
                 key: 'Name',
-                value: `${u.firstName} ${u.lastName}`,
+                value: `${teamLead.firstName} ${teamLead.lastName}`,
             },
             {
                 key: 'Display Name',
-                value: u.displayName,
+                value: teamLead.displayName,
             },
             {
                 key: 'Location',
-                value: u.location,
+                value: teamLead.location,
             },
         ];
-        return {
-            id: u.id,
-            url: `/user/${u.id}`,
-            columns,
-            navigationProps: u,
-        };
-    }) as ListItem[];
-};
 
-var mapTLead = tlead => {
-    var columns = [
-        {
-            key: 'Team Lead',
-            value: '',
-        },
-        {
-            key: 'Name',
-            value: `${tlead.firstName} ${tlead.lastName}`,
-        },
-        {
-            key: 'Display Name',
-            value: tlead.displayName,
-        },
-        {
-            key: 'Location',
-            value: tlead.location,
-        },
-    ];
-    return <Card columns={columns} url={`/user/${tlead.id}`} navigationProps={tlead} />;
-};
+        return (
+            <Card
+                id={`${teamLead.id}-lead`}
+                columns={columnsConfig}
+                navigation={{url: `/user/${teamLead.id}`, data: teamLead}}
+            />
+        );
+    };
 
-interface PageState {
-    teamLead?: UserData;
-    teamMembers?: UserData[];
-}
-
-const TeamOverview = () => {
-    const location = useLocation();
-    const {teamId} = useParams();
-    const [pageData, setPageData] = React.useState<PageState>({});
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
-
-    React.useEffect(() => {
-        var getTeamUsers = async () => {
-            const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
-            const teamLead = await getUserData(teamLeadId);
-
-            const teamMembers = [];
-            for(var teamMemberId of teamMemberIds) {
-                const data = await getUserData(teamMemberId);
-                teamMembers.push(data);
-            }
-            setPageData({
-                teamLead,
-                teamMembers,
-            });
-            setIsLoading(false);
-        };
-        getTeamUsers();
-    }, [teamId]);
+    const teamMembers = () => {
+        return teamMembersFiltered.map(u => {
+            var columns = [
+                {
+                    key: 'Name',
+                    value: `${u.firstName} ${u.lastName}`,
+                },
+                {
+                    key: 'Display Name',
+                    value: u.displayName,
+                },
+                {
+                    key: 'Location',
+                    value: u.location,
+                },
+            ];
+            return {
+                id: `${u.id}-member`,
+                url: `/user/${u.id}`,
+                columns,
+                navigationProps: u,
+            };
+        }) as ListItem[];
+    };
 
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
-            {!isLoading && mapTLead(pageData.teamLead)}
-            <List items={mapArray(pageData?.teamMembers ?? [])} isLoading={isLoading} />
+            <Sections>
+                <SearchBar
+                    onChange={setQuery}
+                    value={query}
+                    placeholder="Search for team members"
+                />
+                {!isLoading && teamLeadCard()}
+                <List items={teamMembers()} isLoading={isLoading} />
+            </Sections>
         </Container>
     );
 };

@@ -15,7 +15,7 @@ describe('Card', () => {
         var columns = [{key: 'columnKey', value: 'columnValue'}];
         render(<Card columns={columns} />);
 
-        expect(screen.getByText('columnKey')).toBeInTheDocument();
+        expect(screen.getByText('columnKey:')).toBeInTheDocument();
         expect(screen.getByText('columnValue')).toBeInTheDocument();
     });
 
@@ -28,11 +28,11 @@ describe('Card', () => {
         ];
         render(<Card columns={columns} />);
 
-        expect(screen.getByText('columnKey1')).toBeInTheDocument();
+        expect(screen.getByText('columnKey1:')).toBeInTheDocument();
         expect(screen.getByText('columnValue1')).toBeInTheDocument();
-        expect(screen.getByText('columnKey2')).toBeInTheDocument();
+        expect(screen.getByText('columnKey2:')).toBeInTheDocument();
         expect(screen.getByText('columnValue2')).toBeInTheDocument();
-        expect(screen.getByText('columnKey3')).toBeInTheDocument();
+        expect(screen.getByText('columnKey3:')).toBeInTheDocument();
         expect(screen.getByText('columnValue3')).toBeInTheDocument();
         expect(screen.getByText('columnKey4')).toBeInTheDocument();
     });
@@ -45,20 +45,19 @@ describe('Card', () => {
         render(
             <Card
                 columns={[{key: 'columnKey', value: 'columnValue'}]}
-                url="path"
-                navigationProps={navProps}
+                navigation={{data: navProps, url: 'path'}}
             />
         );
 
-        fireEvent.click(screen.getByText('columnKey'));
+        fireEvent.click(screen.getByText('columnKey:'));
 
         expect(mockUseNavigate).toHaveBeenCalledWith('path', {state: navProps});
     });
 
     it('should not navigate when card is clicked and navigation is disabled', () => {
-        render(<Card columns={[{key: 'columnKey', value: 'columnValue'}]} hasNavigation={false} />);
+        render(<Card columns={[{key: 'columnKey', value: 'columnValue'}]} />);
 
-        fireEvent.click(screen.getByText('columnKey'));
+        fireEvent.click(screen.getByText('columnKey:'));
 
         expect(mockUseNavigate).not.toHaveBeenCalled();
     });

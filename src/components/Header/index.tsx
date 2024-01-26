@@ -7,17 +7,18 @@ interface Props {
     showBackButton?: boolean;
 }
 
-const Header = ({title, showBackButton = true}: Props) => {
+const Header: React.FC<Props> = ({title, showBackButton = true}) => {
     const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(-1);
+    };
+
     return (
         <HeaderContainer>
             <NavigationHeader>
                 {showBackButton && (
-                    <BackButton
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
+                    <BackButton type="button" onClick={handleClick}>
                         🔙
                     </BackButton>
                 )}

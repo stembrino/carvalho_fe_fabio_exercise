@@ -6,11 +6,11 @@ import {Container} from './styles';
 
 interface Props {
     items?: ListItem[];
-    hasNavigation?: boolean;
-    isLoading: string;
+    isLoading: boolean;
+    align?: 'center' | 'flex-start';
 }
 
-const List = ({items, hasNavigation = true, isLoading}: Props) => {
+const List: React.FC<Props> = ({items, isLoading, align}) => {
     return (
         <Container>
             {isLoading && <Spinner />}
@@ -21,9 +21,8 @@ const List = ({items, hasNavigation = true, isLoading}: Props) => {
                             key={`${id}-${index}`}
                             id={id}
                             columns={columns}
-                            navigationProps={navigationProps}
-                            hasNavigation={hasNavigation}
-                            url={url}
+                            navigation={{data: navigationProps, url}}
+                            align={align}
                         />
                     );
                 })}

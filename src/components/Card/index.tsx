@@ -1,47 +1,46 @@
-import * as React from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Teams, UserData} from 'types';
-import {Container} from './styles';
+import {CardButton} from './styles';
+import Body from './Body';
 
 interface Props {
     id?: string;
-    url?: string;
+    align?: 'center' | 'flex-start';
     columns: Array<{
         key: string;
         value: string;
     }>;
-    hasNavigation?: boolean;
-    navigationProps?: UserData | Teams;
+    navigation?: {
+        url: string;
+        data: UserData | Teams;
+    };
 }
 
-const Card = ({
-    id,
-    columns,
-    url,
-    hasNavigation = true,
-    navigationProps = null,
-}: Props): JSX.Element => {
+const Card: React.FC<Props> = ({id, columns, navigation, align = 'flex-start'}) => {
     const navigate = useNavigate();
 
+    const handleClick = () => {
+        if (!navigation) {
+            return;
+        }
+        navigate(navigation.url, {
+            state: navigation.data,
+        });
+    };
+
     return (
-        <Container
+        <CardButton
+            type="button"
             data-testid={`cardContainer-${id}`}
-            hasNavigation={hasNavigation}
-            onClick={(e: Event) => {
-                if (hasNavigation) {
-                    navigate(url, {
-                        state: navigationProps,
-                    });
-                }
-                e.preventDefault();
-            }}
+            $hasNavigation={!!navigation}
+            $align={align}
+            onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (
-                <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
-                </p>
+                <Body key={columnKey} label={columnKey} text={value} />
             ))}
-        </Container>
+        </CardButton>
     );
 };
 

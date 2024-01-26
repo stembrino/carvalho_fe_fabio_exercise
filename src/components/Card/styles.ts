@@ -1,15 +1,30 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
-export const Container = styled.div<{hasNavigation: boolean}>`
+const navStyles = css`
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.1ms ease-in-out;
+    &:hover {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: #79797933;
+        }
+    }
+`;
+
+export const CardButton = styled.button<{$hasNavigation: boolean; $align: string}>`
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     border: 1px solid black;
     background: #ddd;
     padding: 20px;
     width: 250px;
     max-height: 200px;
-    cursor: ${props => (props.hasNavigation ? 'pointer' : 'default')};
     margin: 5px;
+    align-items: ${({$align}) => $align};
+    ${({$hasNavigation}) => $hasNavigation && navStyles}
 `;
