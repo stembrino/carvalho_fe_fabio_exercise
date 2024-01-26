@@ -5,11 +5,17 @@ interface Props {
     value: string;
     name?: string;
     placeholder?: string;
-    width?: number;
+    size?: 'small' | 'medium' | 'large';
     onChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({value = '', name, placeholder = '', width, onChange}) => {
+const SearchBar: React.FC<Props> = ({
+    value = '',
+    name,
+    placeholder = '',
+    size = 'medium',
+    onChange,
+}) => {
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value);
     };
@@ -23,7 +29,7 @@ const SearchBar: React.FC<Props> = ({value = '', name, placeholder = '', width, 
             aria-label="Search"
             name={name}
             value={value}
-            width={width}
+            size={size}
         />
     );
 };
