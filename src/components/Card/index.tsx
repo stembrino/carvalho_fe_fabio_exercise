@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Teams, UserData} from 'types';
 import {CardButton} from './styles';
+import Body from './Body';
 
 interface Props {
     id?: string;
@@ -35,9 +36,7 @@ const Card: React.FC<Props> = ({id, columns, navigation}) => {
             onClick={handleClick}
         >
             {columns.map(({key: columnKey, value}) => (
-                <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
-                </p>
+                <Body key={columnKey} label={columnKey} text={value} />
             ))}
         </CardButton>
     );
