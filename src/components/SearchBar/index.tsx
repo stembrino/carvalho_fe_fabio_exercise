@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from 'react';
-import {InputSearch} from './styles';
+import {InputSearch, VariantSizes} from './styles';
 
 interface Props {
     value: string;
     name?: string;
     placeholder?: string;
-    size?: 'small' | 'medium' | 'large';
+    size?: VariantSizes;
     onChange: (value: string) => void;
 }
 

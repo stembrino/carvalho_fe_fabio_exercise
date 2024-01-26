@@ -1,11 +1,13 @@
 import styled, {css} from 'styled-components';
 
+export type VariantSizes = 'small' | 'medium' | 'large';
+
 interface InputSearchProps {
     width?: number;
-    size?: 'small' | 'medium' | 'large';
+    size?: VariantSizes;
 }
 
-const variantSize = (size: 'small' | 'medium' | 'large') => {
+const variantSize = (size: VariantSizes) => {
     switch (size) {
         case 'small':
             return css`
