@@ -1,8 +1,7 @@
 # Tempo Frontend challenge
 
-# Solution Improvement
+## Solution Improvement
 
-### Describe what you have improved in the solution
 ### Logs PR #1
 *[Link to Pull Request: `#1`](https://github.com/stembrino/carvalho_fe_fabio_exercise/pull/1#issue-2097254312)*
 
