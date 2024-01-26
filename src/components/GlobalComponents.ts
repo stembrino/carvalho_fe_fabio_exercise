@@ -9,3 +9,11 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
 `;
+
+export const Sections = styled.div`
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`;

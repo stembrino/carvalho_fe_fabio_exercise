@@ -3,7 +3,7 @@ import {useLocation} from 'react-router-dom';
 import {ListItem} from 'types';
 import SearchBar from 'components/SearchBar';
 import Card from '../components/Card';
-import {Container} from '../components/GlobalComponents';
+import {Container, Sections} from '../components/GlobalComponents';
 import Header from '../components/Header';
 import List from '../components/List';
 import {useTeamUsers} from './hooks/useTeamUsers';
@@ -72,15 +72,15 @@ const TeamOverview: React.FC = () => {
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
-            {!isLoading && teamLeadCard()}
-            <h2>Team Members</h2>
-            <SearchBar
-                onChange={setQuery}
-                value={query}
-                placeholder="Search by team member name"
-                width={384}
-            />
-            <List items={teamMembers()} isLoading={isLoading} />
+            <Sections>
+                <SearchBar
+                    onChange={setQuery}
+                    value={query}
+                    placeholder="Search for team members"
+                />
+                {!isLoading && teamLeadCard()}
+                <List items={teamMembers()} isLoading={isLoading} />
+            </Sections>
         </Container>
     );
 };
