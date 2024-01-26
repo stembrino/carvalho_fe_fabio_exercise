@@ -72,13 +72,14 @@ const TeamOverview: React.FC = () => {
     return (
         <Container>
             <Header title={`Team ${location.state.name}`} />
+            {!isLoading && teamLeadCard()}
+            <h2>Team Members</h2>
             <SearchBar
                 onChange={setQuery}
                 value={query}
-                placeholder="Search team member"
-                width={320}
+                placeholder="Search by team member name"
+                width={384}
             />
-            {!isLoading && teamLeadCard()}
             <List items={teamMembers()} isLoading={isLoading} />
         </Container>
     );
